@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMIÈRE — A Culinary Experience Beyond Expectations</title>
+<meta name="description" content="LUMIÈRE fine dining restaurant in Paris. Award-winning tasting menus, an intimate dining room, and a Michelin-recognized kitchen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#0A0A0A;
+    --charcoal:#151312;
+    --charcoal2:#1C1917;
+    --beige:#E9E1D3;
+    --beige-dim:#A79E8E;
+    --gold:#C6A15B;
+    --gold-dim:#8A6F3E;
+    --line:rgba(233,225,211,0.12);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--black);color:var(--beige);font-family:'Inter',sans-serif;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  ::selection{background:var(--gold);color:var(--black);}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:500;}
+
+  .eyebrow{font-size:11px;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s ease,border-color .4s ease;border-bottom:1px solid transparent;}
+  nav.scrolled{background:rgba(10,10,10,0.85);backdrop-filter:blur(8px);border-color:var(--line);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;}
+  .logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:0.3em;}
+  .navlinks{display:none;gap:38px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--beige-dim);}
+  @media(min-width:840px){.navlinks{display:flex;}}
+  .navlinks a:hover{color:var(--gold);}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;transition:all .3s ease;cursor:pointer;border:none;font-family:inherit;}
+  .btn-gold{background:var(--gold);color:var(--black);font-weight:600;}
+  .btn-gold:hover{background:var(--beige);}
+  .btn-line{border:1px solid rgba(233,225,211,0.35);color:var(--beige);background:transparent;}
+  .btn-line:hover{border-color:var(--gold);color:var(--gold);}
+  .navbtn{display:none;}
+  @media(min-width:840px){.navbtn{display:inline-flex;}}
+  .burger{display:flex;background:none;border:none;color:var(--beige);font-size:20px;}
+  @media(min-width:840px){.burger{display:none;}}
+  .mobile-menu{display:none;flex-direction:column;gap:18px;padding:22px 28px 30px;background:rgba(10,10,10,0.97);border-top:1px solid var(--line);font-size:13px;color:var(--beige-dim);}
+  .mobile-menu.open{display:flex;}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.12);transition:transform .3s ease-out;}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(to top, var(--black), rgba(10,10,10,0.5) 55%, rgba(10,10,10,0.75));}
+  .glow{position:absolute;border-radius:50%;filter:blur(70px);opacity:0.12;pointer-events:none;}
+  .glow1{width:320px;height:320px;background:var(--gold);top:30%;left:20%;}
+  .hero-content{position:relative;z-index:2;padding:0 28px 110px;max-width:760px;margin:0 auto;width:100%;}
+  .hero h1{font-size:clamp(38px,6.5vw,66px);line-height:1.15;color:#FAF7F0;margin:20px 0 22px;}
+  .hero p{color:var(--beige-dim);font-size:16px;font-weight:300;max-width:480px;margin-bottom:36px;}
+  .btnrow{display:flex;gap:16px;flex-wrap:wrap;}
+
+  section{padding:120px 0;position:relative;}
+  .section-head{max-width:620px;margin:0 auto 56px;text-align:center;}
+  .section-head h2{font-size:clamp(28px,4vw,44px);margin-top:14px;color:#FAF7F0;}
+  .section-head p{color:var(--beige-dim);margin-top:14px;font-size:15px;font-weight:300;}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1fr;gap:60px;align-items:center;}
+  @media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr;}}
+  .about-grid img{width:100%;aspect-ratio:4/5;object-fit:cover;}
+  .about-text .eyebrow{margin-bottom:16px;display:block;}
+  .about-text h2{font-size:clamp(26px,3.6vw,38px);color:#FAF7F0;margin-bottom:20px;}
+  .about-text p{color:var(--beige-dim);font-weight:300;line-height:1.75;max-width:480px;margin-bottom:44px;font-size:15px;}
+  .timeline{border-left:1px solid rgba(198,161,91,0.3);padding-left:30px;display:flex;flex-direction:column;gap:28px;}
+  .tl-item{position:relative;}
+  .tl-item::before{content:'';position:absolute;left:-35px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--gold);}
+  .tl-year{color:var(--gold);font-family:'Playfair Display',serif;font-size:17px;}
+  .tl-text{color:var(--beige-dim);font-size:13.5px;font-weight:300;margin-top:4px;line-height:1.6;max-width:400px;}
+
+  /* DISHES */
+  .dishes-grid{display:grid;grid-template-columns:1fr;gap:22px;}
+  @media(min-width:640px){.dishes-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:960px){.dishes-grid{grid-template-columns:repeat(4,1fr);}}
+  .dish-img{position:relative;height:270px;overflow:hidden;}
+  .dish-img img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;}
+  .dish-card:hover .dish-img img{transform:scale(1.1);}
+  .chef-badge{position:absolute;top:14px;left:14px;background:var(--gold);color:var(--black);font-size:9px;letter-spacing:0.1em;text-transform:uppercase;padding:6px 12px;font-weight:700;}
+  .dish-info{padding-top:16px;display:flex;justify-content:space-between;align-items:baseline;}
+  .dish-info h3{font-size:17px;color:#FAF7F0;}
+  .dish-price{color:var(--gold);font-size:14px;}
+  .dish-desc{color:var(--beige-dim);font-size:12.5px;font-weight:300;margin-top:8px;line-height:1.55;}
+
+  /* BEFORE/AFTER */
+  .ba-wrap{max-width:880px;margin:0 auto;}
+  .ba-box{position:relative;border-radius:2px;overflow:hidden;aspect-ratio:16/9;user-select:none;box-shadow:0 30px 60px rgba(0,0,0,0.5);}
+  .ba-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .ba-before-wrap{position:absolute;inset:0;overflow:hidden;clip-path:inset(0 50% 0 0);will-change:clip-path;}
+  .ba-before-wrap img{width:100%;height:100%;object-fit:cover;}
+  .ba-line{position:absolute;top:0;bottom:0;width:1px;background:var(--gold);left:50%;}
+  .ba-handle{position:absolute;top:50%;left:50%;width:44px;height:44px;border-radius:50%;background:var(--gold);transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--black);pointer-events:none;}
+  .ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;}
+  .ba-tag{position:absolute;top:16px;padding:6px 16px;font-size:10px;letter-spacing:0.12em;text-transform:uppercase;z-index:3;}
+  .ba-tag.before{left:16px;background:rgba(10,10,10,0.6);}
+  .ba-tag.after{right:16px;background:var(--gold);color:var(--black);}
+
+  /* WHY US */
+  .why-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(min-width:700px){.why-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(min-width:1040px){.why-grid{grid-template-columns:repeat(5,1fr);}}
+  .why-card{background:var(--black);padding:38px 22px;text-align:center;}
+  .why-card .ico{color:var(--gold);font-size:22px;margin-bottom:16px;}
+  .why-card h3{font-size:14.5px;color:#FAF7F0;margin-bottom:8px;font-family:'Inter',sans-serif;font-weight:600;}
+  .why-card p{color:var(--beige-dim);font-size:12px;font-weight:300;line-height:1.55;}
+
+  /* MENU */
+  .menu-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:50px;}
+  .menu-tab{padding:11px 20px;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(233,225,211,0.25);background:transparent;color:var(--beige-dim);cursor:pointer;font-family:inherit;transition:all .25s ease;}
+  .menu-tab.active{background:var(--gold);color:var(--black);border-color:var(--gold);}
+  .menu-list{max-width:700px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:18px;}
+  @media(min-width:640px){.menu-list{grid-template-columns:1fr 1fr;column-gap:48px;}}
+  .menu-row{display:flex;align-items:baseline;gap:8px;border-bottom:1px solid var(--line);padding-bottom:14px;}
+  .menu-row .m-name{font-family:'Playfair Display',serif;color:#FAF7F0;font-size:15px;}
+  .menu-row .m-dots{flex:1;border-bottom:1px dotted rgba(233,225,211,0.25);margin-bottom:5px;}
+  .menu-row .m-price{color:var(--gold);font-size:13px;}
+
+  /* GALLERY */
+  .gallery-grid{columns:2;column-gap:14px;}
+  @media(min-width:760px){.gallery-grid{columns:3;}}
+  .gallery-grid img{width:100%;margin-bottom:14px;cursor:pointer;transition:opacity .3s ease;}
+  .gallery-grid img:hover{opacity:0.75;}
+  .lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.95);display:none;align-items:center;justify-content:center;padding:28px;}
+  .lightbox.open{display:flex;}
+  .lightbox img{max-height:85vh;max-width:100%;object-fit:contain;}
+  .lightbox-close{position:absolute;top:26px;right:26px;color:var(--beige);font-size:26px;background:none;border:none;cursor:pointer;}
+
+  /* TESTIMONIALS */
+  .test-wrap{max-width:680px;margin:0 auto;text-align:center;}
+  .test-quote-mark{color:var(--gold);font-size:34px;font-family:'Playfair Display',serif;opacity:0.6;margin-bottom:10px;}
+  .test-text{font-family:'Playfair Display',serif;font-size:clamp(18px,2.6vw,24px);color:#FAF7F0;line-height:1.6;min-height:110px;font-weight:400;font-style:italic;}
+  .test-stars{color:var(--gold);letter-spacing:2px;margin:18px 0;font-size:13px;}
+  .test-person{display:flex;align-items:center;justify-content:center;gap:10px;}
+  .test-person img{width:38px;height:38px;border-radius:50%;object-fit:cover;}
+  .test-person span{color:var(--beige-dim);font-size:13px;}
+  .test-dots{display:flex;justify-content:center;gap:8px;margin-top:34px;}
+  .test-dots button{width:7px;height:7px;border-radius:50%;background:#3A3634;border:none;cursor:pointer;transition:all .3s ease;padding:0;}
+  .test-dots button.active{background:var(--gold);width:22px;border-radius:4px;}
+
+  /* RESERVATION */
+  .res-form{max-width:640px;margin:0 auto;border:1px solid var(--line);padding:44px 36px;display:grid;grid-template-columns:1fr;gap:20px;}
+  @media(min-width:600px){.res-form{grid-template-columns:1fr 1fr;}}
+  .res-form .full{grid-column:1/-1;}
+  .field label{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--beige-dim);margin-bottom:8px;display:block;}
+  .field input,.field select,.field textarea{width:100%;background:transparent;border:1px solid rgba(233,225,211,0.25);padding:13px 14px;font-size:14px;font-family:inherit;color:var(--beige);outline:none;transition:border-color .25s ease;}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);}
+  .field textarea{resize:none;}
+  .res-form .btn{width:100%;justify-content:center;}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:1fr;gap:44px;}
+  @media(min-width:860px){.contact-grid{grid-template-columns:1fr 1fr;}}
+  .info-row{display:flex;align-items:center;gap:14px;color:var(--beige-dim);margin-bottom:18px;font-size:14px;font-weight:300;}
+  .info-row .ico{color:var(--gold);width:20px;}
+  .map-box{border:1px solid var(--line);height:100%;min-height:240px;display:flex;align-items:center;justify-content:center;color:#5A554E;font-size:13px;}
+
+  footer{border-top:1px solid var(--line);background:var(--charcoal);}
+  .foot-grid{display:grid;grid-template-columns:1fr;gap:36px;padding:70px 0 40px;}
+  @media(min-width:760px){.foot-grid{grid-template-columns:1.3fr 1fr 1fr;}}
+  .foot-logo{font-family:'Playfair Display',serif;font-size:22px;letter-spacing:0.3em;color:#FAF7F0;}
+  .foot-grid p{color:var(--beige-dim);font-size:13px;font-weight:300;margin-top:12px;max-width:280px;}
+  .foot-col h4{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:#FAF7F0;margin-bottom:16px;}
+  .foot-col a{display:block;color:var(--beige-dim);font-size:13px;margin-bottom:10px;}
+  .foot-col a:hover{color:var(--gold);}
+  .foot-newsletter{display:flex;margin-top:10px;}
+  .foot-newsletter input{flex:1;background:transparent;border:1px solid rgba(233,225,211,0.25);padding:12px 14px;color:var(--beige);font-size:13px;outline:none;font-family:inherit;}
+  .foot-newsletter button{background:var(--gold);color:var(--black);border:none;padding:0 18px;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;font-family:inherit;}
+  .foot-bottom{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:#5A554E;font-size:11.5px;}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;}html{scroll-behavior:auto;}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-inner">
+    <div class="logo">LUMIÈRE</div>
+    <div class="navlinks">
+      <a href="#about">Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reservation">Reserve</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#reservation" class="btn btn-line navbtn">Reserve a Table</a>
+    <button class="burger" id="burgerBtn">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about">Story</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reservation">Reserve</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-bg">
+    <img id="heroImg" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=80" alt="Luxury restaurant interior">
+  </div>
+  <div class="glow glow1"></div>
+  <div class="hero-content">
+    <span class="eyebrow reveal">Fine Dining · Est. 2014</span>
+    <h1 class="reveal" style="transition-delay:100ms;">A Culinary Experience Beyond Expectations</h1>
+    <p class="reveal" style="transition-delay:200ms;">Award-winning fine dining with unforgettable flavors.</p>
+    <div class="btnrow reveal" style="transition-delay:300ms;">
+      <a href="#reservation" class="btn btn-gold">Reserve a Table</a>
+      <a href="#menu" class="btn btn-line">View Menu</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <img class="reveal" src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=800&q=80" alt="Chef Antoine Rousseau">
+    <div class="about-text reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>Cooking is our language of hospitality</h2>
+      <p>LUMIÈRE was born from a simple idea: that a meal can be a memory. Every plate that leaves our kitchen carries the discipline of classical French technique and the curiosity of modern gastronomy.</p>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-year">2014</div><div class="tl-text">Chef Antoine Rousseau opens LUMIÈRE with a single promise — no compromise on ingredients.</div></div>
+        <div class="tl-item"><div class="tl-year">2017</div><div class="tl-text">Awarded our first Michelin star, becoming the youngest kitchen in the city to receive one.</div></div>
+        <div class="tl-item"><div class="tl-year">2021</div><div class="tl-text">Opened our private cellar room, housing over 4,000 bottles from six countries.</div></div>
+        <div class="tl-item"><div class="tl-year">2026</div><div class="tl-text">Recognized among the World's 100 Best Restaurants for the third consecutive year.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Signature Dishes</span><h2>Crafted to be remembered</h2></div>
+    <div class="dishes-grid">
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=800&q=80" alt="Seared Foie Gras"><span class="chef-badge">Chef's Pick</span></div>
+        <div class="dish-info"><h3>Seared Foie Gras</h3><span class="dish-price">$42</span></div>
+        <div class="dish-desc">Caramelized brioche, fig compote, aged balsamic reduction</div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Wagyu Tenderloin"><span class="chef-badge">Chef's Pick</span></div>
+        <div class="dish-info"><h3>Wagyu Tenderloin</h3><span class="dish-price">$96</span></div>
+        <div class="dish-desc">A5 wagyu, truffle jus, roasted bone marrow, seasonal greens</div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1559847844-5315695dadae?auto=format&fit=crop&w=800&q=80" alt="Lobster Thermidor"></div>
+        <div class="dish-info"><h3>Lobster Thermidor</h3><span class="dish-price">$68</span></div>
+        <div class="dish-desc">Butter-poached lobster, cognac cream, gruyère gratin</div>
+      </div>
+      <div class="dish-card reveal">
+        <div class="dish-img"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=800&q=80" alt="Dark Chocolate Soufflé"><span class="chef-badge">Chef's Pick</span></div>
+        <div class="dish-info"><h3>Dark Chocolate Soufflé</h3><span class="dish-price">$24</span></div>
+        <div class="dish-desc">Valrhona chocolate, Madagascar vanilla bean ice cream</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">The Experience</span><h2>Sunset to candlelight</h2><p>Drag to watch the room transform as evening falls.</p></div>
+    <div class="ba-wrap reveal">
+      <div class="ba-box">
+        <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80" alt="Candlelight evening atmosphere">
+        <div class="ba-before-wrap" id="baBeforeWrap">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Restaurant before sunset">
+        </div>
+        <div class="ba-line" id="baLine"></div>
+        <div class="ba-handle" id="baHandle">⇔</div>
+        <span class="ba-tag before">Day</span>
+        <span class="ba-tag after">Evening</span>
+        <input type="range" min="0" max="100" value="50" class="ba-range" id="baRange">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Why Choose Us</span><h2>Excellence in every detail</h2></div>
+    <div class="why-grid">
+      <div class="why-card reveal"><div class="ico">✦</div><h3>Michelin-Quality</h3><p>Every dish held to the standard that earned us our star.</p></div>
+      <div class="why-card reveal"><div class="ico">◈</div><h3>Award-Winning Chef</h3><p>Led by Chef Antoine Rousseau, 20 years across Paris and Tokyo.</p></div>
+      <div class="why-card reveal"><div class="ico">✧</div><h3>Fresh &amp; Local</h3><p>Ingredients sourced daily from regional farms and fishermen.</p></div>
+      <div class="why-card reveal"><div class="ico">◇</div><h3>Luxury Interior</h3><p>An intimate 40-seat dining room designed for quiet elegance.</p></div>
+      <div class="why-card reveal"><div class="ico">★</div><h3>Exceptional Service</h3><p>One server per four tables — attentive, never intrusive.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Our Menu</span><h2>A seasonal tasting journey</h2></div>
+    <div class="menu-tabs reveal">
+      <button class="menu-tab active" data-cat="starters">Starters</button>
+      <button class="menu-tab" data-cat="mains">Main Courses</button>
+      <button class="menu-tab" data-cat="desserts">Desserts</button>
+      <button class="menu-tab" data-cat="wine">Wine Collection</button>
+      <button class="menu-tab" data-cat="cocktails">Cocktails</button>
+    </div>
+    <div class="menu-list reveal" id="menuList"></div>
+  </div>
+</section>
+
+<section id="gallery" style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Gallery</span><h2>Moments at LUMIÈRE</h2></div>
+    <div class="gallery-grid reveal" id="galleryGrid">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 1">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 2">
+      <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 3">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 4">
+      <img src="https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 5">
+      <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?auto=format&fit=crop&w=800&q=80" alt="LUMIÈRE atmosphere 6">
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img id="lightboxImg" src="" alt="Enlarged view">
+</div>
+
+<section>
+  <div class="wrap test-wrap">
+    <span class="eyebrow reveal">Testimonials</span>
+    <h2 class="reveal" style="margin:14px 0 44px;">Guests remember us</h2>
+    <div class="reveal">
+      <div class="test-quote-mark">"</div>
+      <div class="test-text" id="testText"></div>
+      <div class="test-stars">★★★★★</div>
+      <div class="test-person"><img id="testImg" src="" alt=""><span id="testName"></span></div>
+      <div class="test-dots" id="testDots"></div>
+    </div>
+  </div>
+</section>
+
+<section id="reservation" style="background:var(--charcoal);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="eyebrow">Reservation</span><h2>Reserve your table</h2></div>
+    <form class="res-form reveal" id="resForm">
+      <div class="field full"><label>Name</label><input type="text" required placeholder="Your full name"></div>
+      <div class="field"><label>Phone</label><input type="tel" required placeholder="+1 (555) 000-0000"></div>
+      <div class="field"><label>Guests</label>
+        <select required><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7+</option></select>
+      </div>
+      <div class="field"><label>Date</label><input type="date" required></div>
+      <div class="field"><label>Time</label><input type="time" required></div>
+      <div class="field full"><label>Special Requests</label><textarea rows="3" placeholder="Allergies, celebrations, seating preference..."></textarea></div>
+      <div class="full"><button type="submit" class="btn btn-gold" id="resSubmit">Confirm Reservation</button></div>
+    </form>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Visit Us</span>
+      <h2 style="margin:14px 0 30px;font-size:clamp(26px,3.6vw,38px);">Find LUMIÈRE</h2>
+      <div class="info-row"><span class="ico">📍</span> 12 Rue de la Lumière, Paris, 75008</div>
+      <div class="info-row"><span class="ico">🕒</span> Tue–Sun: 18:00 – 23:30 · Closed Mondays</div>
+      <div class="info-row"><span class="ico">📞</span> +33 1 42 68 90 21</div>
+      <div class="info-row"><span class="ico">✉️</span> reservations@lumiere-paris.com</div>
+      <div class="info-row"><span class="ico">📷</span> @lumiere.paris</div>
+      <div class="info-row"><span class="ico">👤</span> /lumiereparis</div>
+    </div>
+    <div class="map-box reveal">Map placeholder — 12 Rue de la Lumière, Paris</div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-logo">LUMIÈRE</div>
+      <p>An intimate fine dining experience in the heart of Paris.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Explore</h4>
+      <a href="#about">Our Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#reservation">Reservations</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+    <div class="foot-col">
+      <h4>Newsletter</h4>
+      <p style="margin-bottom:10px;">Seasonal menus and private events.</p>
+      <div class="foot-newsletter"><input type="email" placeholder="Your email"><button>Join</button></div>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 LUMIÈRE Paris. All rights reserved.</div>
+</footer>
+
+<script>
+  // Nav
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY > 30); });
+  var burgerBtn = document.getElementById('burgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  burgerBtn.addEventListener('click', function(){ mobileMenu.classList.toggle('open'); });
+  mobileMenu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ mobileMenu.classList.remove('open'); }); });
+
+  // Reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  // Hero mouse parallax
+  var heroImg = document.getElementById('heroImg');
+  var hero = document.getElementById('hero');
+  hero.addEventListener('mousemove', function(e){
+    var x = (e.clientX / window.innerWidth - 0.5) * 16;
+    var y = (e.clientY / window.innerHeight - 0.5) * 16;
+    heroImg.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(1.12)';
+  });
+
+  // Before/After slider
+  var baRange = document.getElementById('baRange');
+  var baBeforeWrap = document.getElementById('baBeforeWrap');
+  var baLine = document.getElementById('baLine');
+  var baHandle = document.getElementById('baHandle');
+  baRange.addEventListener('input', function(){
+    var val = baRange.value;
+    baBeforeWrap.style.clipPath = 'inset(0 ' + (100 - val) + '% 0 0)';
+    baLine.style.left = val + '%';
+    baHandle.style.left = val + '%';
+  });
+
+  // Menu data + tabs
+  var menu = {
+    starters: [["Heirloom Tomato Tartare","$22"],["Hokkaido Scallop Crudo","$28"],["Wild Mushroom Velouté","$19"]],
+    mains: [["Wagyu Tenderloin","$96"],["Lobster Thermidor","$68"],["Duck Breast à l'Orange","$54"]],
+    desserts: [["Dark Chocolate Soufflé","$24"],["Vanilla Bean Crème Brûlée","$18"],["Passionfruit Pavlova","$20"]],
+    wine: [["Château Margaux, 2015","$420"],["Dom Pérignon, 2013","$380"],["Sassicaia, 2018","$290"]],
+    cocktails: [["Gold Leaf Negroni","$26"],["Smoked Old Fashioned","$24"],["Saffron Spritz","$22"]]
+  };
+  var menuList = document.getElementById('menuList');
+  function renderMenu(cat){
+    menuList.innerHTML = '';
+    menu[cat].forEach(function(item){
+      var row = document.createElement('div');
+      row.className = 'menu-row';
+      row.innerHTML = '<span class="m-name">'+item[0]+'</span><span class="m-dots"></span><span class="m-price">'+item[1]+'</span>';
+      menuList.appendChild(row);
+    });
+  }
+  renderMenu('starters');
+  document.querySelectorAll('.menu-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      document.querySelectorAll('.menu-tab').forEach(function(t){ t.classList.remove('active'); });
+      tab.classList.add('active');
+      renderMenu(tab.dataset.cat);
+    });
+  });
+
+  // Gallery lightbox
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightboxImg');
+  document.querySelectorAll('#galleryGrid img').forEach(function(img){
+    img.addEventListener('click', function(){
+      lightboxImg.src = img.src;
+      lightbox.classList.add('open');
+    });
+  });
+  document.getElementById('lightboxClose').addEventListener('click', function(){ lightbox.classList.remove('open'); });
+  lightbox.addEventListener('click', function(e){ if(e.target === lightbox) lightbox.classList.remove('open'); });
+
+  // Testimonials carousel
+  var testimonials = [
+    { name: "Isabelle Moreau", text: "An unforgettable evening. Every course told a story, and the service was flawless from the moment we arrived.", img: "https://i.pravatar.cc/100?img=45" },
+    { name: "James Whitfield", text: "LUMIÈRE redefined what fine dining means to me. The wagyu alone is worth the reservation wait.", img: "https://i.pravatar.cc/100?img=15" },
+    { name: "Elena Kowalski", text: "Intimate, elegant, and precise. This is the best restaurant I've visited in the last decade.", img: "https://i.pravatar.cc/100?img=48" }
+  ];
+  var testIndex = 0;
+  var testText = document.getElementById('testText');
+  var testImg = document.getElementById('testImg');
+  var testName = document.getElementById('testName');
+  var testDots = document.getElementById('testDots');
+  testimonials.forEach(function(_, i){
+    var dot = document.createElement('button');
+    if(i === 0) dot.className = 'active';
+    dot.addEventListener('click', function(){ testIndex = i; renderTest(); });
+    testDots.appendChild(dot);
+  });
+  function renderTest(){
+    var t = testimonials[testIndex];
+    testText.textContent = '"' + t.text + '"';
+    testImg.src = t.img;
+    testName.textContent = t.name;
+    testDots.querySelectorAll('button').forEach(function(d, i){ d.classList.toggle('active', i === testIndex); });
+  }
+  renderTest();
+  setInterval(function(){ testIndex = (testIndex + 1) % testimonials.length; renderTest(); }, 5000);
+
+  // Reservation form
+  document.getElementById('resForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = document.getElementById('resSubmit');
+    btn.textContent = 'Reservation Requested ✓';
+    setTimeout(function(){ btn.textContent = 'Confirm Reservation'; e.target.reset(); }, 3000);
+  });
+</script>
+
+</body>
+</html>
